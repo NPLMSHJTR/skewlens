@@ -1,0 +1,10 @@
+{
+  "name": "skewlens-scanner",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Parallel JSONL column profiler used by the skewlens CLI",
+  "engines": {
+    "node": ">=22.6"
+  }
+}
