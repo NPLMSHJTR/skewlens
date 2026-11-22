@@ -1,5 +1,7 @@
 # skewlens
 
+[English](README.md) | [简体中文](README.zh-CN.md)
+
 **Find the columns that will break your joins.** `skewlens` profiles a JSONL
 dataset in one parallel pass and ranks every column by the three things that
 actually hurt: a hot key, a wall of nulls, and a cardinality that does not fit
@@ -15,6 +17,15 @@ skewlens 0.1.0  1,000,000 rows  112.3 MB  0.8409 s  133.5 MB/s  4 worker(s)
  4  country           0.09  low            2.5%    0.0%
  5  amount            0.00  low            0.0%    0.0%
 report: demo/report.md
+```
+
+## Workflow
+
+```mermaid
+flowchart LR
+    A["1. Generate or Supply JSONL<br/>(skewlens synth or events.jsonl)"] --> B["2. Parallel Byte-Range Sketch Scan<br/>(scanner/scan.ts: HLL + Count-Min + Chan)"]
+    B --> C["3. Score Skew, Nulls, Cardinality & Drift<br/>(skewlens report -> report.md)"]
+    C --> D["4. Fix Hot Keys Before Running Joins"]
 ```
 
 ## Why a second profiler
